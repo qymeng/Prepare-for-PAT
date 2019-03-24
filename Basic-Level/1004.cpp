@@ -1,3 +1,4 @@
+/* 1004 ³É¼¨ÅÅÃû */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +14,7 @@ struct Student
 
 int main()
 {
-    int n = 0, i;
+    int i, n = 0;
     scanf("%d", &n);
 
     struct Student *buffer = (struct Student *)malloc(n * sizeof(struct Student));

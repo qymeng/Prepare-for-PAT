@@ -1,31 +1,25 @@
+/* 1005 继续(3n+1)猜想 */
 #include <stdio.h>
 #include <vector>
 #include <iostream>
 using namespace std;
 
 //判断 a 是否覆盖 b
-bool isKey(int a, int b)
+bool cover(int a, int b)
 {
     while (a != 1)
     {
         if (a % 2 == 1) //奇数
         {
-            a = (a * 3 + 1) / 2;
-            if (a == b)
-            {
-                return true;
-            }
+            a = a * 3 + 1;
         }
-        else
+        a >>= 1;
+
+        if (a == b)
         {
-            a /= 2;
-            if (a == b)
-            {
-                return true;
-            }
+            return true;
         }
     }
-
     return false;
 }
 
@@ -44,11 +38,11 @@ int main()
 
         for (j = 0; j < buffer.size();) //判断当前“关键”是否被覆盖
         {
-            if (isKey(buffer[j], temp))
+            if (cover(buffer[j], temp))
             {
                 break;
             }
-            else if (isKey(temp, buffer[j]))
+            else if (cover(temp, buffer[j]))
             {
                 buffer.erase(buffer.begin() + j);
             }
@@ -65,7 +59,7 @@ int main()
 
     for (i = 0; i < buffer.size(); i++)
     {
-        for (int j = 0; j < buffer.size() - i - 1; j++)
+        for (j = 0; j < buffer.size() - i - 1; j++)
         {
             if (buffer[j] < buffer[j + 1])
             {
@@ -78,14 +72,7 @@ int main()
 
     for (i = 0; i < buffer.size(); i++)
     {
-        if (i != buffer.size() - 1)
-        {
-            printf("%d ", buffer[i]);
-        }
-        else
-        {
-            printf("%d", buffer[i]);
-        }
+        printf("%d%s", buffer[i], i == buffer.size() - 1 ? "" : " ");
     }
     return 0;
 }

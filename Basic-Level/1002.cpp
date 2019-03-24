@@ -1,23 +1,26 @@
+/* 1002 写出这个数 */
 #include <stdio.h>
 #include <string.h>
-#define MAX_LEN 100
+#define MAX_LEN 100 //n小于10的100次方，说明最多99位 
+                    //求和之后不超过1000
 
+//获取百位、十位、个位数字
 int getNum(int sum, int n)
 {
     switch (n)
     {
-    case 2:
-    {
-        return sum / 100;
-    }
-    case 1:
-    {
-        return sum % 100 / 10;
-    }
-    case 0:
-    {
-        return sum % 10;
-    }
+        case 2:
+        {
+            return sum / 100;
+        }
+        case 1:
+        {
+            return sum % 100 / 10;
+        }
+        case 0:
+        {
+            return sum % 10;
+        }
     }
 }
 
@@ -28,16 +31,12 @@ int main()
 
     scanf("%s", buffer);
 
-    int i = 0;
+    int i, sum = 0;
     int len = strlen(buffer);
-    int sum = 0;
-
-    for (; i < len; i++)
+    for (i = 0; i < len; i++)
     {
         sum += buffer[i] - '0';
     }
-
-    int flag = 0;
 
     int hundred = getNum(sum, 2);
     if (hundred != 0)

@@ -1,10 +1,13 @@
+/* 1003 我要通过！ */
+//主要是寻找规律，
+//以P和T为分界线，A的数量，left*mid=right
 #include <stdio.h>
 #include <string.h>
 
 #define MAX_N 10
 #define MAX_LEN 100
 
-int test(const char *str)
+int check(const char *str)
 {
     int i, len = strlen(str);
     char ch;
@@ -89,7 +92,6 @@ int test(const char *str)
 int main()
 {
     const char *result[] = {"NO", "YES"};
-
     char buffer[MAX_N][MAX_LEN] = {0};
 
     int i, n = 0;
@@ -98,14 +100,7 @@ int main()
     for (i = 0; i < n; i++)
     {
         scanf("%s", buffer + i);
-        if (i == n - 1)
-        {
-            printf("%s", result[test(buffer[i])]);
-        }
-        else
-        {
-            printf("%s\n", result[test(buffer[i])]);
-        }
+        printf("%s%s", result[check(buffer[i])], (i == n - 1 ? "" : "\n"));
     }
 
     return 0;
