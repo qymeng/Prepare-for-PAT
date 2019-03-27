@@ -1,9 +1,8 @@
 /* 1018 锤子剪刀布 */
 #include <stdio.h>
 #include <string.h>
-#include <iostream>
-using namespace std;
 
+#define MAX_LEN 2
 #define WIN 1
 #define LOSE -1
 #define DRAW 0
@@ -107,38 +106,42 @@ int main()
     int N, i;
 
     //1.输入次数
-    cin >> N;
+    scanf("%d", &N);
 
-    //2.循环输入对局详情
-    int action1, action2;
+    // //2.循环输入对局详情
+    char action1[MAX_LEN], action2[MAX_LEN];
     struct Info p1, p2;
     memset(&p1, 0, sizeof(struct Info));
     memset(&p2, 0, sizeof(struct Info));
 
     for (i = 0; i < N; i++)
     {
-        cin >> action1 >> action2;
-        int result = judge(action1, action2);
-        if (result == WIN)
+        scanf("%s%s", action1, action2);
+
+        switch (judge(action1[0], action2[0]))
+        {
+        case WIN:
         {
             p1.win++;
             p2.lose++;
-            count(p1, action1);
+            count(p1, action1[0]);
+            break;
         }
-        else if (result == LOSE)
+        case LOSE:
         {
             p1.lose++;
             p2.win++;
-            count(p2, action2);
+            count(p2, action2[0]);
+            break;
         }
-        else
+        case DRAW:
         {
             p1.draw++;
             p2.draw++;
+            break;
+        }
         }
     }
-
-    printf("%d %d", i, N);
 
     printf("%d %d %d\n", p1.win, p1.draw, p1.lose);
     printf("%d %d %d\n", p2.win, p2.draw, p2.lose);
