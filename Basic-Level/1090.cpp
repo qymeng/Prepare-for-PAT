@@ -3,9 +3,10 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <string.h>
 using namespace std;
 
-#define BUFFER_SIZE 10000
+#define BUFFER_SIZE 100000
 
 int main()
 {
@@ -28,34 +29,40 @@ int main()
     int K;
     int temp;
     int len;
+    bool assist[BUFFER_SIZE];
     for (i = 0; i < M; i++)
     {
         scanf("%d", &K);
-        printf("i = %d K = %d\n", i, K);
 
-        bool flag[BUFFER_SIZE] = {0};
-        buffer.clear();
+        vector<int> buffer;
+        memset(assist, 0, BUFFER_SIZE);
         for (j = 0; j < K; j++)
         {
             scanf("%d", &temp);
             buffer.push_back(temp);
-            flag[temp] = true;
+            assist[temp] = true;
         }
 
-        for (j = 0; j < K; j++)
+        bool flag = true;
+        for (j = 0; j < K && flag; j++)
         {
             temp = buffer[j];
             len = incompatible[temp].size();
             for (k = 0; k < len; k++)
             {
-                if (flag[incompatible[temp][k]])
+                if (assist[incompatible[temp][k]])
                 {
                     printf("No\n");
+                    flag = false;
+                    break;
                 }
             }
         }
 
-        printf("Yes\n");
+        if (flag)
+        {
+            printf("Yes\n");
+        }
     }
 
     return 0;
